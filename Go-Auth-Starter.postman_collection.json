@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "74b2eac4-12db-419d-a5a0-ef32a00c392d",
+		"name": "Go-Auth-Starter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19075691"
+	},
+	"item": [
+		{
+			"name": "TokenController",
+			"item": [
+				{
+					"name": "Generate Admin Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"hi@gmail.com\",\r\n    \"password\" : \"pass@1010\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate User Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"hi@gmail.com\",\r\n    \"password\" : \"pass@1010\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/token",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserController",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"hey@gmail.com\",\r\n    \"contact\" : \"7777777777\",\r\n    \"password\" : \"pass@1010\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] Get By Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc4NDkyNzUsInJvbGUiOiJDT05TVU1FUiIsInVzZXJJZCI6IjY2NjQyZGUyNmNiMmNmNDAwYzBjZjhjYyIsInVzZXJuYW1lIjoiaGV5QGdtYWlsLmNvbSJ9.zDEiPmjiBG6hZqcYA70dPKhm8T5TcLij8ELBcayjulM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/user/get/666395d463a1f7025683595b",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"get",
+								"666395d463a1f7025683595b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "[ADMIN] Get by username",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc4MDY2NDcsInVzZXJJZCI6IjY2NjIyZTRmNWIzODIwZDRlOThjYmI0NiIsInVzZXJuYW1lIjoiaGVsbG9jbGFoaXJpQGdtYWlsLmNvbSJ9.y1pZOB_my0djm_XmoQkAdxGt4RRIKUKp7vvjGZiR16c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/user/get/username/hi@gmail.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"get",
+								"username",
+								"hi@gmail.com"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTc4NDkyNzUsInJvbGUiOiJDT05TVU1FUiIsInVzZXJJZCI6IjY2NjQyZGUyNmNiMmNmNDAwYzBjZjhjYyIsInVzZXJuYW1lIjoiaGV5QGdtYWlsLmNvbSJ9.zDEiPmjiBG6hZqcYA70dPKhm8T5TcLij8ELBcayjulM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/user/get/my/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"get",
+								"my",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
