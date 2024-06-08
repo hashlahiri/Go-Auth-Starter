@@ -9,7 +9,6 @@ import (
 
 /** Authenticates an incoming request to server */
 func Authenticate(context *gin.Context) {
-
 	/**Check if contains 'Authorization'*/
 	token := context.Request.Header.Get("Authorization")
 	if(token == "") {

@@ -6,11 +6,19 @@ import (
 	"github.com/gin-gonic/gin"
 	"go-auth-starter.app/base/domain"
 	"go-auth-starter.app/base/response"
+	"go-auth-starter.app/base/security"
 )
 
 // ADMIN
 /** Get user by id */
 func getUserById(context *gin.Context) {
+
+	/** Check if 'ADMIN' authentication or not */
+	_, isUser := security.IsAdminAuthenticated(context)
+	if(!isUser) {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Authentication needed"})
+		return
+	}
 
 	/** fetch by path variable 'id' */
 	id := context.Param("id")
@@ -33,9 +41,14 @@ func getUserById(context *gin.Context) {
 /** Get user identifying from token passed */
 func getMyUser(context *gin.Context) {
 
-	/** Get the userInfo from auth token */
-	authResponse,_ := context.Get("userInfo")
-	userInfo,_ := authResponse.(response.AuthTokenResponse)
+	// /** Get the userInfo from auth token */
+	// authResponse,_ := context.Get("userInfo")
+	// userInfo,_ := authResponse.(response.AuthTokenResponse)
+	userInfo, isUser := security.IsUserAuthenticated(context)
+	if(!isUser) {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Authentication needed"})
+		return
+	}
 
 	/** Fetch associated user */
 	userInfoFetched, err := domain.GetUserById(context, userInfo.Id) // get user by id
@@ -69,6 +82,13 @@ func convertUserInfoToConsumerResponse(userInfo domain.User) (response.UserConsu
 /** Get user by username */
 func getUserByUsername(context *gin.Context) {
 
+	/** Check if 'ADMIN' authentication or not */
+	_, isUser := security.IsAdminAuthenticated(context)
+	if(!isUser) {
+		context.JSON(http.StatusBadRequest, gin.H{"message": "Authentication needed"})
+		return
+	}
+	
 	/** extract from path */
 	username := context.Param("username")
 	if username == "" {

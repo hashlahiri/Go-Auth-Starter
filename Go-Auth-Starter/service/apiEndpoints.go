@@ -17,7 +17,7 @@ func ApiEndpoints(server *gin.Engine) {
 	userEndpoint := "/user"
 
 	// User endpoints
-	authenticated.GET(userEndpoint+"/get/my/", getMyUser)
+	authenticated.GET(userEndpoint+"/get/my/", getMyUser) //USER
 	authenticated.GET(userEndpoint+"/get/:id", getUserById) // ADMIN
 	authenticated.GET(userEndpoint+"/get/username/:username", getUserByUsername) // ADMIN
 

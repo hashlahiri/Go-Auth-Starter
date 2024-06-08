@@ -6,10 +6,11 @@ import (
 	"time"
 
 	"github.com/go-playground/validator/v10"
-	"go-auth-starter.app/base/utility"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
+
+	"go-auth-starter.app/base/utility"
 )
 
 var userCollection * mongo.Collection
@@ -24,6 +25,7 @@ type User struct {
 	Email		string `bson:"email"`
 	Contact		string `bson:"phone"`
 	Password	string `bson:"password" validate:"required"`
+	Role		string `bson:"role"`
 	CreatedAt	time.Time `bson:"createdAt"`
 	ModifiedAt	time.Time `bson:"modifiedAt"`
 }
@@ -95,7 +97,9 @@ func (userToSave *User) SaveUser(ctx context.Context) (*mongo.InsertOneResult, e
 		return nil, err
 	}
 
+	/** assign the related fields */
 	userToSave.Password = hashedPassword
+	userToSave.Role = utility.Consumer // Authorizing user with 'CONSUMER'
 
 	userToSave.CreatedAt = time.Now().Local()
 	userToSave.ModifiedAt = time.Now().Local()
@@ -113,12 +117,13 @@ func (userToValidate *User) ValidateUserAndGenerateToken(ctx context.Context) (s
 	if(err != nil) {
 		return "", err
 	}
+	
 
 	passwordMatchResult := utility.CompareHashedPasswords(userFetched.Password, userToValidate.Password)
 	if passwordMatchResult {
 
 		// generate the token, user matched
-		token, err := utility.GenerateToken(userFetched.Username, userFetched.ID.Hex())
+		token, err := utility.GenerateToken(userFetched.Username, userFetched.ID.Hex(), userFetched.Role)
 		return token, err
 	} else {
 		
