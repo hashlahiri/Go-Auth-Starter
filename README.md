@@ -50,6 +50,17 @@ Using Go Language to generate a complete REST API module with authentication and
 
     ```sh
     go run main.go
+
+    go mod init go-auth-starter.app/base // registers the app and builds the exe file
+
+    go mod tidy // imports all dependencies
+
+    add extra needed dependencies whereever needed 
+
+    go build
+
+    go run .
+
     ```
 
 ### Usage
