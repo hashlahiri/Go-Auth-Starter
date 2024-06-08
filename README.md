@@ -62,6 +62,7 @@ Using Go Language to generate a complete REST API module with authentication and
     go run .
 
     ```
+5. Make sure to add 'ADMIN' role consumer beforehand (atleast 1 - to access the ADMIN endpoints)
 
 ### Usage
 
